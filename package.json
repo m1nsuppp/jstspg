@@ -1,0 +1,20 @@
+{
+  "name": "fepg",
+  "version": "0.0.0",
+  "description": "web front-end programming playground",
+  "author": "m1nsuplee",
+  "license": "MIT",
+  "main": "index.js",
+  "private": true,
+  "scripts": {
+    "preinstall": "pnpm dlx only-allow pnpm"
+  },
+  "engines": {
+    "node": "18.17.0"
+  },
+  "packageManager": "pnpm@8.15.2",
+  "workspaces": [
+    "packages/*",
+    "playgrounds/*"
+  ]
+}
