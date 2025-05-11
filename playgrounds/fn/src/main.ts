@@ -57,7 +57,59 @@ async function* getProductBatch(
   }
 }
 
-(async function main() {
+type User = {
+  id: number;
+  name: string;
+  email: string;
+};
+
+type PaginatedResponse<T> = {
+  data: T[];
+  page: number;
+  totalPages: number;
+  hasMore: boolean;
+};
+
+async function fetchUserPage(
+  page: number,
+  limit: number
+): Promise<PaginatedResponse<User>> {
+  const totalUsers = 25;
+  const startIndex = (page - 1) * limit;
+  const endIndex = Math.min(startIndex + limit, totalUsers);
+  const totalPages = Math.ceil(totalUsers / limit);
+
+  const users: User[] = [];
+  for (let i = startIndex; i < endIndex; i++) {
+    users.push({
+      id: i + 1,
+      name: `사용자${i + 1}`,
+      email: `user${i + 1}@example.com`,
+    });
+  }
+
+  return await delay(1500, {
+    data: users,
+    page,
+    totalPages,
+    hasMore: page < totalPages,
+  });
+}
+
+async function* fetchAllUsers(pageSize: number): AsyncGenerator<User[]> {
+  let currentPage = 1;
+  let hasMore = true;
+
+  while (hasMore) {
+    const response = await fetchUserPage(currentPage, pageSize);
+    yield response.data;
+
+    hasMore = response.hasMore;
+    currentPage++;
+  }
+}
+
+async function main() {
   const batchSize = 2;
   const productBatches = getProductBatch(batchSize);
   const startTime = Date.now();
@@ -75,4 +127,23 @@ async function* getProductBatch(
       );
     }
   }
+}
+
+async function runPaginationExample() {
+  console.log("\n페이지네이션 API 예제 시작...");
+  const pageSize = 5;
+  const userGenerator = fetchAllUsers(pageSize);
+  let pageNum = 1;
+
+  for await (const users of userGenerator) {
+    console.log(`페이지 ${pageNum}: ${users.map((u) => u.name).join(", ")}`);
+    pageNum++;
+  }
+
+  console.log("모든 사용자 데이터를 가져왔습니다.");
+}
+
+(async function () {
+  await main();
+  await runPaginationExample();
 })();
