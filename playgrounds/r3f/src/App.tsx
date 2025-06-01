@@ -2,6 +2,7 @@ import { useState, useRef, type JSX } from "react";
 import "./App.css";
 import { Canvas } from "@react-three/fiber";
 import { Mesh, Vector3 } from "three";
+import { useCustomQuery } from "./useCustomQuery";
 import { OrbitControls } from "@react-three/drei";
 
 function Box2() {
@@ -37,6 +38,10 @@ function Box2() {
 }
 
 function App(): JSX.Element {
+  useCustomQuery("unique-key", async () => {
+    const res = await fetch("/api/data");
+    return res.json();
+  });
   return (
     <div style={{ width: "100vw", height: "100vh" }}>
       <Canvas>
