@@ -49,6 +49,25 @@ importers:
         specifier: ^6.0.5
         version: 6.0.5
 
+  playgrounds/domino-chain-reaction:
+    dependencies:
+      three:
+        specifier: ^0.176.0
+        version: 0.176.0
+    devDependencies:
+      '@types/node':
+        specifier: ^22.15.29
+        version: 22.15.29
+      '@types/three':
+        specifier: ^0.176.0
+        version: 0.176.0
+      typescript:
+        specifier: ~5.8.3
+        version: 5.8.3
+      vite:
+        specifier: ^6.3.5
+        version: 6.3.5(@types/node@22.15.29)
+
   playgrounds/event-bus-comm:
     dependencies:
       mitt:
@@ -93,7 +112,7 @@ importers:
         version: 8.31.1(eslint@9.26.0)(typescript@5.8.3)
       vite:
         specifier: ^6.3.5
-        version: 6.3.5
+        version: 6.3.5(@types/node@22.15.29)
 
   playgrounds/fn:
     devDependencies:
@@ -157,7 +176,7 @@ importers:
         version: 8.31.1(eslint@9.26.0)(typescript@5.8.3)
       vite:
         specifier: ^6.3.5
-        version: 6.3.5
+        version: 6.3.5(@types/node@22.15.29)
 
   playgrounds/router:
     devDependencies:
@@ -1513,6 +1532,12 @@ packages:
   /@types/json-schema@7.0.15:
     resolution: {integrity: sha512-5+fP8P8MFNC+AyZCDxrB2pkZFPGzqQWUzpSeuuVLvm8VMcorNYavBqoFcxK8bQz4Qsbn4oUEEem4wDLfcysGHA==}
 
+  /@types/node@22.15.29:
+    resolution: {integrity: sha512-LNdjOkUDlU1RZb8e1kOIUpN1qQUlzGkEtbVNo53vbrwDg5om6oduhm4SiUaPW5ASTXhAiP0jInWG8Qx9fVlOeQ==}
+    dependencies:
+      undici-types: 6.21.0
+    dev: true
+
   /@types/offscreencanvas@2019.7.3:
     resolution: {integrity: sha512-ieXiYmgSRXUDeOntE1InxjWyvEelZGP63M+cGuquuRLuIKKT1osnkXjxev9B7d1nXSug5vpunx+gNlbVxMlC9A==}
     dev: false
@@ -1934,7 +1959,7 @@ packages:
       vite: ^4 || ^5 || ^6
     dependencies:
       '@swc/core': 1.11.24
-      vite: 6.3.5
+      vite: 6.3.5(@types/node@22.15.29)
     transitivePeerDependencies:
       - '@swc/helpers'
     dev: true
@@ -3667,6 +3692,10 @@ packages:
     hasBin: true
     dev: true
 
+  /undici-types@6.21.0:
+    resolution: {integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==}
+    dev: true
+
   /unpipe@1.0.0:
     resolution: {integrity: sha512-pjy2bYhSsufwWlKwPc+l3cN7+wuJlK6uz0YdJEOlQDbl6jo/YlPi4mb8agUkVC8BF7V8NuzeyPNqRksA3hztKQ==}
     engines: {node: '>= 0.8'}
@@ -3839,7 +3868,7 @@ packages:
       fsevents: 2.3.3
     dev: true
 
-  /vite@6.3.5:
+  /vite@6.3.5(@types/node@22.15.29):
     resolution: {integrity: sha512-cZn6NDFE7wdTpINgs++ZJ4N49W2vRp8LCKrn3Ob1kYNtOo21vfDoaV5GzBfLU4MovSAB8uNRm4jgzVQZ+mBzPQ==}
     engines: {node: ^18.0.0 || ^20.0.0 || >=22.0.0}
     hasBin: true
@@ -3879,6 +3908,7 @@ packages:
       yaml:
         optional: true
     dependencies:
+      '@types/node': 22.15.29
       esbuild: 0.25.0
       fdir: 6.4.4(picomatch@4.0.2)
       picomatch: 4.0.2
